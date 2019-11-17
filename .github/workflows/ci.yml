@@ -17,7 +17,11 @@ jobs:
         git branch --create-reflog master origin/master
 
     - name: GitVersion
+      id: GitVersion
       uses: ./ # Uses an action in the root directory
+
+    - name: Output
+      run: 'echo "NuGetVersionV2: ${{ steps.GitVersion.outputs.GitVersion_NuGetVersionV2 }}"'
 
 #    - name: GitVersion
 #      uses: docker://gittools/gitversion:5.0.2-linux
