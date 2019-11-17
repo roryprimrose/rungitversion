@@ -12,12 +12,13 @@ runs:
   using: 'docker'
   image: 'docker://gittools/gitversion:5.1.3-linux-ubuntu-18.04-netcoreapp2.1'
   args:
-    - '/github/workspace'
-    - '/nofetch'
-    - '/exec'
-    # - 'echo` \"$GitVersion_NuGetVersionV2\\r\\n$GitVersion_AssemblySemVer\\r\\n$GitVersion_MajorMinorPatch\\r\\n$GitVersion_InformationalVersion\"'
-    - '/bin/sh'
-    - '/execargs'
-    - '-c` "echo $GitVersion_NuGetVersionV2\\r\\n$GitVersion_AssemblySemVer\\r\\n$GitVersion_MajorMinorPatch\\r\\n$GitVersion_InformationalVersion"'
+    - '/nofetch /exec /bin/sh /execargs -c \"echo $GitVersion_NuGetVersionV2\\r\\n$GitVersion_AssemblySemVer\\r\\n$GitVersion_MajorMinorPatch\\r\\n$GitVersion_InformationalVersion\"'
+    # - '/github/workspace'
+    # - '/nofetch'
+    # - '/exec'
+    # # - 'echo` \"$GitVersion_NuGetVersionV2\\r\\n$GitVersion_AssemblySemVer\\r\\n$GitVersion_MajorMinorPatch\\r\\n$GitVersion_InformationalVersion\"'
+    # - '/bin/sh'
+    # - '/execargs'
+    # - '-c` "echo $GitVersion_NuGetVersionV2\\r\\n$GitVersion_AssemblySemVer\\r\\n$GitVersion_MajorMinorPatch\\r\\n$GitVersion_InformationalVersion"'
 #  /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_NuGetVersionV2\\r\\n$GitVersion_AssemblySemVer\\r\\n$GitVersion_MajorMinorPatch\\r\\n$GitVersion_InformationalVersion\""
     #  > /github/workspace/version.txt
