@@ -13,7 +13,7 @@ runs:
   image: 'docker://gittools/gitversion:5.1.3-linux-ubuntu-18.04-netcoreapp2.1'
   args:
     - '/github/workspace'
-    - 'nofetch'
+    - '/nofetch'
     - '/exec'
     - '/bin/sh'
     - '/execargs'
