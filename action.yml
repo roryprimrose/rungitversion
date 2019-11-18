@@ -10,16 +10,13 @@ outputs:
     description: 'The NuGetVersionV2 value'
 runs:
   using: 'docker'
-  image: 'docker://gittools/gitversion:5.1.3-linux-ubuntu-18.04-netcoreapp2.1'
+  image: 'Dockerfile'
   args:
-    # - '/github/workspace /nofetch /exec /bin/sh /execargs -c \"echo $GitVersion_NuGetVersionV2\\r\\n$GitVersion_AssemblySemVer\\r\\n$GitVersion_MajorMinorPatch\\r\\n$GitVersion_InformationalVersion\"'
     - '/github/workspace'
     - '/nofetch'
     - '/exec'
     - '/bin/sh'
     - '/execargs'
     - '-c "echo ::set-output name=test::$GitVersion_NuGetVersionV2"'
-    # # - 'echo` \"$GitVersion_NuGetVersionV2\\r\\n$GitVersion_AssemblySemVer\\r\\n$GitVersion_MajorMinorPatch\\r\\n$GitVersion_InformationalVersion\"'
-    # - '-c` "echo $GitVersion_NuGetVersionV2\\r\\n$GitVersion_AssemblySemVer\\r\\n$GitVersion_MajorMinorPatch\\r\\n$GitVersion_InformationalVersion"'
-#  /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_NuGetVersionV2\\r\\n$GitVersion_AssemblySemVer\\r\\n$GitVersion_MajorMinorPatch\\r\\n$GitVersion_InformationalVersion\""
-    #  > /github/workspace/version.txt
+    # - '-c "echo $GitVersion_NuGetVersionV2\\r\\n$GitVersion_AssemblySemVer\\r\\n$GitVersion_MajorMinorPatch\\r\\n$GitVersion_InformationalVersion"'
+    
