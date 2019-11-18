@@ -21,7 +21,7 @@ jobs:
       uses: ./ # Uses an action in the root directory
 
     - name: Output
-      run: 'echo "NuGetVersionV2: ${{ steps.gitversion.outputs.NuGetVersionV2 }}"'
+      run: 'echo "NuGetVersionV2: ${{ steps.gitversion.outputs.NuGetVersionV2 }}\\r\\nMajorMinorPatch: ${{ steps.gitversion.outputs.MajorMinorPatch }}"'
 
 #    - name: GitVersion
 #      uses: docker://gittools/gitversion:5.0.2-linux
