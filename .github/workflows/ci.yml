@@ -16,9 +16,11 @@ jobs:
         git fetch --tags
         git branch --create-reflog master origin/master
 
+    - uses: ./ # Uses an action in the root directory
+
     - name: GitVersion
       id: gitversion
-      uses: ./ # Uses an action in the root directory
+      uses: roryprimrose/rungitversion # Uses an action in the root directory
 
     - name: Output
       run: 'echo "NuGetVersionV2: ${{ steps.gitversion.outputs.test }}"'
