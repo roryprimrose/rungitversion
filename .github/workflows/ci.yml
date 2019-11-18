@@ -10,20 +10,17 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
-
     - name: Fetch tags and master for GitVersion
       run: |
         git fetch --tags
         git branch --create-reflog master origin/master
 
-    - uses: ./ # Uses an action in the root directory
-
     - name: GitVersion
       id: gitversion
-      uses: roryprimrose/rungitversion@feature/ExecuteGitVersion # Uses an action in the root directory
-
+      uses: ./ # Uses an action in the root directory
+      
     - name: Output
-      run: 'echo "NuGetVersionV2: ${{ steps.gitversion.outputs.test }}"'
+      run: echo "Version is ${{ steps.gitversion.outputs.test }}"
 
 #    - name: GitVersion
 #      uses: docker://gittools/gitversion:5.0.2-linux
