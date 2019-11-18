@@ -20,7 +20,7 @@ jobs:
 
     - name: GitVersion
       id: gitversion
-      uses: roryprimrose/rungitversion # Uses an action in the root directory
+      uses: roryprimrose/rungitversion@feature/ExecuteGitVersion # Uses an action in the root directory
 
     - name: Output
       run: 'echo "NuGetVersionV2: ${{ steps.gitversion.outputs.test }}"'
