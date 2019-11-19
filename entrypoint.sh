@@ -1,11 +1,13 @@
-#!/bin/sh -l
+#!/bin/bash
 
 dotnet /app/GitVersion.dll /github/workspace /nocache /nofetch /output json > /version.json
 
 data="$(cat /version.json)"
-
-NuGetVersionV2=jq ".NuGetVersionV2"
+# (?<="NuGetVersionV2":")[^"]+(?=")
+NuGetVersionV2=$(echo $data | grep -Eio '"NuGetVersionV2":"[^"]+"')
+# NuGetVersionV2=jq ".NuGetVersionV2"
 echo $NuGetVersionV2
+
 echo "::set-output name=NuGetVersionV2::$NuGetVersionV2"
 
 # echo $data
