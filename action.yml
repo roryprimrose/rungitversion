@@ -6,8 +6,66 @@ description: 'Runs GitVersion and returns output variables'
 #     required: true
 #     default: 'gittools/gitversion:5.1.3-linux-ubuntu-18.04-netcoreapp2.1'
 outputs:
-  NuGetVersionV2: # id of output
+  Major: # id of output
+    description: 'The Major value'
+  Minor:
+    description: 'The Minor value'
+  Patch:
+    description: 'The Patch value'
+  PreReleaseTag:
+    description: 'The PreReleaseTag value'
+  PreReleaseTagWithDash:
+    description: 'The PreReleaseTagWithDash value'
+  PreReleaseLabel:
+    description: 'The PreReleaseLabel value'
+  PreReleaseNumber:
+    description: 'The PreReleaseNumber value'
+  WeightedPreReleaseNumber:
+    description: 'The WeightedPreReleaseNumber value'
+  BuildMetaData:
+    description: 'The BuildMetaData value'
+  BuildMetaDataPadded:
+    description: 'The BuildMetaDataPadded value'
+  FullBuildMetaData:
+    description: 'The FullBuildMetaData value'
+  MajorMinorPatch:
+    description: 'The MajorMinorPatch value'
+  SemVer:
+    description: 'The SemVer value'
+  LegacySemVer:
+    description: 'The LegacySemVer value'
+  LegacySemVerPadded:
+    description: 'The LegacySemVerPadded value'
+  AssemblySemVer:
+    description: 'The AssemblySemVer value'
+  AssemblySemFileVer:
+    description: 'The AssemblySemFileVer value'
+  FullSemVer:
+    description: 'The FullSemVer value'
+  InformationalVersion:
+    description: 'The InformationalVersion value'
+  BranchName:
+    description: 'The BranchName value'
+  Sha:
+    description: 'The Sha value'
+  ShortSha:
+    description: 'The ShortSha value'
+  NuGetVersionV2:
     description: 'The NuGetVersionV2 value'
+  NuGetVersion:
+    description: 'The NuGetVersion value'
+  NuGetPreReleaseTagV2:
+    description: 'The NuGetPreReleaseTagV2 value'
+  NuGetPreReleaseTag:
+    description: 'The NuGetPreReleaseTag value'
+  VersionSourceSha:
+    description: 'The VersionSourceSha value'
+  CommitsSinceVersionSource:
+    description: 'The CommitsSinceVersionSource value'
+  CommitsSinceVersionSourcePadded:
+    description: 'The CommitsSinceVersionSourcePadded value'
+  CommitDate:
+    description: 'The CommitDate value'
 runs:
   using: 'docker'
   image: 'Dockerfile'
