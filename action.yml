@@ -6,7 +6,7 @@ description: 'Runs GitVersion and returns output variables'
 #     required: true
 #     default: 'gittools/gitversion:5.1.3-linux-ubuntu-18.04-netcoreapp2.1'
 outputs:
-  test: # id of output
+  NuGetVersionV2: # id of output
     description: 'The NuGetVersionV2 value'
 runs:
   using: 'docker'

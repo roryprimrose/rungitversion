@@ -1,44 +1,55 @@
 #!/bin/bash
 
+dotnet /app/GitVersion.dll /github/workspace /nocache /nofetch /output buildserver
 dotnet /app/GitVersion.dll /github/workspace /nocache /nofetch /output json > /version.json
 
 data="$(cat /version.json)"
-# (?<="NuGetVersionV2":")[^"]+(?=")
-NuGetVersionV2=$(echo $data | grep -Eio '"NuGetVersionV2":"[^"]+"')
-# NuGetVersionV2=jq ".NuGetVersionV2"
-echo $NuGetVersionV2
 
-echo "::set-output name=NuGetVersionV2::$NuGetVersionV2"
+function outputValue() {
+    local prefix='"'
+    local suffix='":(("[^"]+")|[0-9]+)'
+    local expression=$prefix$1$suffix
 
-# echo $data
+    # Get the json line ("key":"value" or "key":value)
+    local line=$(echo $data | grep -Eio $expression)
 
-# echo ::set-output name=NuGetVersionV2::$GitVersion_NuGetVersionV2
+    # Split the line and take the value
+    local part=$(echo $line | cut -d \: -f 2)
 
-# "Major":0,
-# "Patch":0,
-# "PreReleaseTag":"ExecuteGitVersion.1",
-# "PreReleaseTagWithDash":"-ExecuteGitVersion.1",
-# "PreReleaseLabel":"ExecuteGitVersion",
-# "PreReleaseNumber":1,
-# "WeightedPreReleaseNumber":30001,
-# "BuildMetaData":37,
-# "BuildMetaDataPadded":"0037",
-# "FullBuildMetaData":"37.Branch.feature-ExecuteGitVersion.Sha.90938eda6105f8218bd75e2278d8a65316683355",
-# "MajorMinorPatch":"0.1.0",
-# "SemVer":"0.1.0-ExecuteGitVersion.1",
-# "LegacySemVer":"0.1.0-ExecuteGitVersion1",
-# "LegacySemVerPadded":"0.1.0-ExecuteGitVersio0001",
-# "AssemblySemVer":"0.1.0.0",
-# "AssemblySemFileVer":"0.1.0.0",
-# "FullSemVer":"0.1.0-ExecuteGitVersion.1+37",
-# "InformationalVersion":"0.1.0-ExecuteGitVersion.1+37.Branch.feature-ExecuteGitVersion.Sha.90938eda6105f8218bd75e2278d8a65316683355",
-# "Sha":"90938eda6105f8218bd75e2278d8a65316683355",
-# "ShortSha":"90938ed",
-# "NuGetVersionV2":"0.1.0-executegitversio0001",
-# "NuGetVersion":"0.1.0-executegitversio0001",
-# "NuGetPreReleaseTagV2":"executegitversio0001",
-# "NuGetPreReleaseTag":"executegitversio0001",
-# "VersionSourceSha":"64705abfad54d484e6c252c01a698e94b8da8924",
-# "CommitsSinceVersionSource":37,
-# "CommitsSinceVersionSourcePadded":"0037",
-# "CommitDate":"2019-11-18"
+    # Remove the " characters
+    local value="${part//[\"]}"
+
+    # Log the value to the github action output parameter
+    echo "::set-output name=$1::$value"
+}
+
+outputValue "Major"
+outputValue "Minor"
+outputValue "Patch"
+outputValue "PreReleaseTag"
+outputValue "PreReleaseTagWithDash"
+outputValue "PreReleaseLabel"
+outputValue "PreReleaseNumber"
+outputValue "WeightedPreReleaseNumber"
+outputValue "BuildMetaData"
+outputValue "BuildMetaDataPadded"
+outputValue "FullBuildMetaData"
+outputValue "MajorMinorPatch"
+outputValue "SemVer"
+outputValue "LegacySemVer"
+outputValue "LegacySemVerPadded"
+outputValue "AssemblySemVer"
+outputValue "AssemblySemFileVer"
+outputValue "FullSemVer"
+outputValue "InformationalVersion"
+outputValue "BranchName"
+outputValue "Sha"
+outputValue "ShortSha"
+outputValue "NuGetVersionV2"
+outputValue "NuGetVersion"
+outputValue "NuGetPreReleaseTagV2"
+outputValue "NuGetPreReleaseTag"
+outputValue "VersionSourceSha"
+outputValue "CommitsSinceVersionSource"
+outputValue "CommitsSinceVersionSourcePadded"
+outputValue "CommitDate"
