@@ -8,5 +8,5 @@ docker build -t entrypoint .
 ```
 Run the container
 ```
-docker run --rm -v [PATH]:/repo  entrypoint
+docker run --rm -v [PATH]:/github/workspace entrypoint
 ```
