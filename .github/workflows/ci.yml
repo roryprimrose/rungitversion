@@ -20,7 +20,7 @@ jobs:
       uses: ./ # Uses an action in the root directory
       
     - name: Output
-      run: echo "Version is ${{ steps.gitversion.outputs.test }}"
+      run: echo "Version is ${{ steps.gitversion.outputs.NuGetVersionV2 }}"
 
 #    - name: GitVersion
 #      uses: docker://gittools/gitversion:5.0.2-linux
