@@ -10,11 +10,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
-#    - name: Fetch tags and master for GitVersion
-#      run: |
-#        git fetch --tags
-#        git branch --create-reflog master origin/master
-#        
+    - name: Fetch tags and master for GitVersion
+      run: |
+        git fetch --tags
+        git branch --create-reflog master origin/master
+        
     - name: GitVersion
       id: gitversion
       uses: ./ # Uses an action in the root directory
