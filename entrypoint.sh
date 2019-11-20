@@ -32,6 +32,8 @@ if [[ $buildserver == *"Could not find a 'develop' or 'master' branch, neither l
     
     "
 
+    return 1
+
 fi
 
 if [ $result -ne 0 ]; then
