@@ -32,7 +32,7 @@ if [[ $buildserver == *"Could not find a 'develop' or 'master' branch, neither l
     
     "
 
-    return 1
+    exit 1
 
 fi
 
