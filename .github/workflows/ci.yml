@@ -18,6 +18,9 @@ jobs:
     - name: GitVersion
       id: gitversion
       uses: ./ # Uses an action in the root directory
+      with:
+        nocache: 'true'
+        nofetch: 'true'
       
     - name: Output
       run: |
