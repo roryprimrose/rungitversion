@@ -1,10 +1,22 @@
 #!/bin/bash
 
-echo "nofetch: $1"
-echo "nocache: $2"
+nofetch=""
+nocache=""
 
-dotnet /app/GitVersion.dll /github/workspace /nocache /nofetch /output buildserver
-dotnet /app/GitVersion.dll /github/workspace /nocache /nofetch /output json > /version.json
+# Check if the nofetch option has been set
+if [ "${1,,}" == "true" ] ;then
+    echo "nofetch enabled"
+    nofetch="/nofetch"
+fi
+
+# Check if the nocache option has been set
+if [ "${2,,}" == "true" ] ;then
+    echo "nocache enabled"
+    nocache="/nocache"
+fi
+
+dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output buildserver
+dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output json > /version.json
 
 data="$(cat /version.json)"
 
