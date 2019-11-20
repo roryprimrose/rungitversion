@@ -15,7 +15,24 @@ if [ "${2,,}" == "true" ] ;then
     nocache="/nocache"
 fi
 
-dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output buildserver; result=$?
+dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output buildserver > /version.txt; result=$?
+
+buildserver="$(cat /version.txt)"
+
+if [[ $buildserver == *"Could not find a 'develop' or 'master' branch, neither locally nor remotely."* ]] ;then
+
+    echo "
+    
+    Fetch the master branch and tags before running GitVersion. Use the following GitHub actions step before running this action.
+
+    - name: Fetch tags and master for GitVersion
+      run: |
+        git fetch --tags
+        git branch --create-reflog master origin/master
+    
+    "
+
+fi
 
 if [ $result -ne 0 ]; then
     echo "Failed to evaluate GitVersion (/output buildserver)"
@@ -29,7 +46,7 @@ if [ $result -ne 0 ]; then
     exit $result
 fi
 
-data="$(cat /version.json)"
+json="$(cat /version.json)"
 
 function outputValue() {
     local prefix='"'
@@ -37,7 +54,7 @@ function outputValue() {
     local expression=$prefix$1$suffix
 
     # Get the json line ("key":"value" or "key":value)
-    local line=$(echo $data | grep -Eio $expression)
+    local line=$(echo $json | grep -Eio $expression)
 
     # Split the line and take the value
     local part=$(echo $line | cut -d \: -f 2)
