@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "nofetch: $1"
+echo "nocache: $2"
+
 dotnet /app/GitVersion.dll /github/workspace /nocache /nofetch /output buildserver
 dotnet /app/GitVersion.dll /github/workspace /nocache /nofetch /output json > /version.json
 
