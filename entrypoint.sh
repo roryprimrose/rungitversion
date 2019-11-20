@@ -15,14 +15,14 @@ if [ "${2,,}" == "true" ] ;then
     nocache="/nocache"
 fi
 
-result=dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output buildserver
+result=$(dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output buildserver)
 
 if [ $result -ne 0 ]; then
     echo "Failed to evaluate GitVersion (/output buildserver)"
     exit $result
 fi
 
-result=dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output json > /version.json
+result=$(dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output json > /version.json)
 
 if [ $result -ne 0 ]; then
     echo "Failed to evaluate GitVersion (/output json)"
