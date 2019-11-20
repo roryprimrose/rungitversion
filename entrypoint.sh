@@ -24,12 +24,20 @@ echo "$buildserver"
 if [[ $buildserver == *"Could not find a 'develop' or 'master' branch, neither locally nor remotely."* ]] ;then
 
     echo "
-    Fetch the master branch and tags before running GitVersion. Use the following GitHub actions step before running this action.
+    Fetch the master branch and tags after checkout and before running GitVersion. Use the following GitHub actions steps.
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
 
     - name: Fetch tags and master for GitVersion
       run: |
         git fetch --tags
         git branch --create-reflog master origin/master
+        
+    - name: GitVersion
+      id: gitversion
+      uses: roryprimrose/rungitversion
     "
 
     exit 1
