@@ -19,18 +19,24 @@ dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output buildserv
 
 buildserver="$(cat /version.txt)"
 
+echo $buildserver
+
 if [[ $buildserver == *"Could not find a 'develop' or 'master' branch, neither locally nor remotely."* ]] ;then
 
     echo "
-    
     Fetch the master branch and tags before running GitVersion. Use the following GitHub actions step before running this action.
 
     - name: Fetch tags and master for GitVersion
       run: |
         git fetch --tags
         git branch --create-reflog master origin/master
-    
     "
+
+    exit 1
+
+fi
+
+if [[ $buildserver == *"System.InvalidOperationException"* ]] ;then
 
     exit 1
 
