@@ -16,14 +16,14 @@ if [ "${2,,}" == "true" ] ;then
 fi
 
 dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output buildserver; result=$?
-
+echo $result
 if [ $result -ne 0 ]; then
     echo "Failed to evaluate GitVersion (/output buildserver)"
     exit $result
 fi
 
 dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output json > /version.json; result=$?
-
+echo $result
 if [ $result -ne 0 ]; then
     echo "Failed to evaluate GitVersion (/output json)"
     exit $result
