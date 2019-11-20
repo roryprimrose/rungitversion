@@ -15,11 +15,11 @@ if [ "${2,,}" == "true" ] ;then
     nocache="/nocache"
 fi
 
-dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output buildserver > /version.txt; result=$?
+dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output buildserver > /version.txt
 
 buildserver="$(cat /version.txt)"
 
-echo $buildserver
+echo "$buildserver"
 
 if [[ $buildserver == *"Could not find a 'develop' or 'master' branch, neither locally nor remotely."* ]] ;then
 
