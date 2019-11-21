@@ -36,7 +36,7 @@ steps:
     
 - name: GitVersion
   id: gitversion  # step id used as reference for output values
-  uses: roryprimrose/rungitversion
+  uses: roryprimrose/rungitversion@v1.0.0
   
 - name: Output version values 
   run: |
