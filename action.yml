@@ -76,10 +76,3 @@ runs:
   args:
     - ${{ inputs.nofetch }}
     - ${{ inputs.nocache }}
-  #   - '/github/workspace'
-  #   - '/exec'
-  #   - '/bin/sh'
-  #   - '/execargs'
-  #   - '-c "echo ::set-output name=test::$GitVersion_NuGetVersionV2"'
-    # - '-c "echo $GitVersion_NuGetVersionV2\\r\\n$GitVersion_AssemblySemVer\\r\\n$GitVersion_MajorMinorPatch\\r\\n$GitVersion_InformationalVersion"'
-    

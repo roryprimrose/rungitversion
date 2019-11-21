@@ -67,9 +67,7 @@ fi
 json="$(cat /version.json)"
 
 function outputValue() {
-    local prefix='"'
-    local suffix='":(("[^"]+")|[0-9]+)'
-    local expression=$prefix$1$suffix
+    local expression="\"$1\":((\"[^\"]+\")|[0-9]+)"
 
     # Get the json line ("key":"value" or "key":value)
     local line=$(echo $json | grep -Eio $expression)
