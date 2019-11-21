@@ -1,0 +1,8 @@
+mode: ContinuousDeployment
+branches:
+  master:
+    tag: beta
+  feature:
+    increment: Minor
+  hotfix:
+    tag: useBranchName
