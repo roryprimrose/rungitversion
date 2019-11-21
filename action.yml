@@ -76,3 +76,6 @@ runs:
   args:
     - ${{ inputs.nofetch }}
     - ${{ inputs.nocache }}
+branding:
+  icon: bookmark
+  color: blue
