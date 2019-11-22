@@ -109,5 +109,5 @@ docker build -t rungitversion .
 ```
 Run the container
 ```
-docker run --rm -v [PATH]:/github/workspace rungitversion
+docker run --rm -v ${PWD}:/github/workspace rungitversion
 ```
