@@ -16,10 +16,12 @@ steps:
 - name: Checkout
   uses: actions/checkout@v1
 
-- name: Fetch tags and master for GitVersion
-  run: |
-    git fetch --tags
-    git branch --create-reflog master origin/master
+- name: Fetch tags for GitVersion
+  run: git fetch --tags
+
+- name: Fetch master for GitVersion
+  if: github.ref != 'refs/heads/master'
+  run: git branch --create-reflog master origin/master
 ```
 
 Basic:
@@ -29,11 +31,13 @@ steps:
 - name: Checkout
   uses: actions/checkout@v1
 
-- name: Fetch tags and master for GitVersion
-  run: |
-    git fetch --tags
-    git branch --create-reflog master origin/master
-    
+- name: Fetch tags for GitVersion
+  run: git fetch --tags
+
+- name: Fetch master for GitVersion
+  if: github.ref != 'refs/heads/master'
+  run: git branch --create-reflog master origin/master
+
 - name: GitVersion
   id: gitversion  # step id used as reference for output values
   uses: roryprimrose/rungitversion@v1.0.0
