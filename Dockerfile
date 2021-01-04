@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM gittools/gitversion:5.1.3-linux-ubuntu-18.04-netcoreapp2.1
+FROM gittools/gitversion:5.5.1-linux-ubuntu.18.04-x64-netcoreapp3.1
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
