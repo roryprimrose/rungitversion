@@ -15,7 +15,7 @@ if [ "${2,,}" == "true" ] ;then
     nocache="/nocache"
 fi
 
-dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output buildserver > /version.txt; result=$?
+/tools/dotnet-gitversion /github/workspace $nocache $nofetch /output buildserver > /version.txt; result=$?
 
 buildserver="$(cat /version.txt)"
 
@@ -56,7 +56,7 @@ if [ $result -ne 0 ]; then
     exit $result
 fi
 
-dotnet /app/GitVersion.dll /github/workspace $nocache $nofetch /output json > /version.json; result=$?
+/tools/dotnet-gitversion /github/workspace $nocache $nofetch /output json > /version.json; result=$?
 
 # It doesn't look like GitVersion.dll returns anything but 0. This is here just in case this changes in the future.
 if [ $result -ne 0 ]; then
